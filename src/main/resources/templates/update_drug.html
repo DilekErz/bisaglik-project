@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>İlaç Güncelle</title>
+</head>
+<body style="font-family: Arial; padding: 20px;">
+    <h1>İlaç Güncelle</h1>
+    
+    <form th:action="@{'/drugs/update/' + ${drug.id}}" th:object="${drug}" method="post">
+
+        <label>İsim:</label>
+        <input type="text" th:field="*{name}" required><br><br>
+
+        <label>Barkod:</label>
+        <input type="text" th:field="*{barcodeNumber}" required><br><br>
+
+        <label>Stok:</label>
+        <input type="number" th:field="*{stock}" required><br><br>
+
+        <label>Fiyat:</label>
+        <input type="number" step="0.01" th:field="*{price}" required><br><br>
+
+		<label>Eczane:</label>
+		<select th:field="*{pharmacy.id}">
+		    <option th:each="ph : ${pharmacies}" th:value="${ph.id}" th:text="${ph.name}"></option>
+		</select> <br><br>
+
+        <button type="submit">💾 Kaydet</button>
+        <a th:href="@{/drugs}"><button type="button">Vazgeç</button></a>
+    </form>
+</body>
+</html>

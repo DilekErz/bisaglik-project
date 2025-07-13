@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		   <title>İlaç Listesi</title>
+	</head>
+	<body>
+		<h2>İlaç Listesi</h2>
+		
+		<!---ilaçları arama kutusu (textbox, button)-->
+		<form th:action="@{/drugs/search}" method="get">
+			<input type="text" name="keyword" placeholder="ilaç adı veya barkod ara..."/>
+			<button type="submit">Ara</button>	
+		</form>
+		
+		
+		<div sec:authorize="hasRole('ADMIN')">
+		<a th:href="@{/drugs/add}">
+		    <button>➕ Yeni İlaç Ekle</button>
+		</a>
+		</div>
+		<br><br>
+		
+		<div style="text-align: right; margin-bottom: 10px;">
+		    <a th:href="@{/cart}">
+		        <button style="background-color: orange; padding: 6px 12px;">
+		            🛒 Sepetim <!--(<span th:text="${cartSize}">0</span>)-->
+		        </button>
+		    </a>
+		</div>
+		
+		<div th:if="${message}" style="color: green; font-weight: bold; margin-bottom: 10px;">
+		    <p th:text="${message}"></p>
+		</div>
+
+		
+		<table border="1">
+			<tr>
+				<th>İsim</th>
+				<th>Barkod Numarası</th>
+				<th>Stok</th>
+				<th>Fiyat (₺)</th>
+				<th sec:authorize="hasRole('ADMIN')">İşlemler</th>
+			</tr>
+			<tr th:each="drug : ${drugs}"> <!---Java'dan gelen drugs listesindeki her ilacı tek tek döner.--->
+				<td th:text="${drug.name}"></td>
+				  <td th:text="${drug.barcodeNumber}"></td>
+				<td th:text="${drug.stock}"></td>	
+				<!-- İlaçların adı, üreticisi ve stok bilgileri tabloda gösterilir.-->	
+				
+				<td th:text="${drug.price} + ' ₺'"></td> <!-- Veriyi gösteren kısma -->
+				
+				
+
+				<!-- Admin işlemleri -->
+				<td sec:authorize="hasRole('ADMIN')">
+				    <a th:href="@{'/drugs/update/' + ${drug.id}}">
+						<button>✏️ Güncelle</button></a>
+				    <a th:href="@{'/drugs/delete/' + ${drug.id}}"
+				       onclick="return confirm('Bu ilacı silmek istediğinize emin misiniz?')">
+				        <button style="color:red">🗑️ Sil</button>
+				    </a>
+				</td>
+
+				<!-- User işlemleri -->
+				<td>
+					<form th:action="@{'/cart/add/' + ${drug.id}}" method="post" style="display:inline;">
+					    <input type="number" name="quantity" value="1" min="1" style="width:50px;" required>
+					    
+					    <!-- Eczane ID gizli olarak gönderiliyor -->
+					    <input type="hidden" name="pharmacyId" th:value="${drug.pharmacy.id}" />
+					    
+					    <button type="submit">🛒 Sepete Ekle</button>
+					</form>
+
+
+
+				</td>
+				
+				
+				
+				</tr>
+				
+				<!--Controller’dan gelen liste HTML içinde th: ifadeleriyle gösterilir.--->
+		</table>
+	</body>
+	
+</html>

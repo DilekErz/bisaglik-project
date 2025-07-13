@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Kullanıcı Paneli</title>
+    <style>
+        body {
+            background-color: rgb(255, 191, 223); 
+            margin: 0;/*dış boşlukları sıfırladım*/
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            height: 100vh; /* Sayfa yüksekliği kadar */
+          display: flex;
+         justify-content: center;
+            align-items: center;
+            text-align: center;/*ortala*/
+        }
+
+        .panel {
+            background-color: white;
+          padding: 40px;
+           border-radius: 10px;
+          box-shadow: 0 0 12px rgba(0,0,0,0.2);
+        }
+
+        h1 {
+          color: #d63384;
+        }
+
+        p {
+            color: #555;
+           margin-bottom: 30px;
+        }
+
+        button {
+            background-color: #ff69b4;
+            color: white;
+            padding: 12px 20px;
+            font-size: 16px;
+           border: none;
+           border-radius: 6px;
+          cursor: pointer;
+        }
+
+        button:hover { /* button efekti ekledim */
+            background-color: #e055a0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="panel">
+     <h1>BiSağlık Kullanıcı Paneline Hoş Geldiniz!</h1>
+      <p>Normal kullanıcı yetkileri ile giriş yaptınız.</p>
+       <a href="/pharmacy/list">
+         <button type="button">📋 Eczaneleri Görüntüle</button>
+     </a>
+             </div>
+    </div>
+</body>
+</html>

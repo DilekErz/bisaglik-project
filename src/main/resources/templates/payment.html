@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Ödeme Sayfası</title>
+</head>
+<body>
+    <h1>💳 Ödeme Sayfası</h1>
+	
+    <form method="post" th:action="@{/cart/confirm-payment}">
+        <label>Ad Soyad:</label><br>
+        <input type="text" name="name" required><br><br>
+
+        <label>Kart Numarası:</label><br>
+        <input type="text" name="cardNumber" required><br><br>
+
+        <label>Son Kullanma Tarihi:</label><br>
+        <input type="text" name="expiryDate" placeholder="MM/YY" required><br><br>
+
+        <label>CVV:</label><br>
+        <input type="password" name="cvv" required><br><br>
+
+        <button type="submit">Ödemeyi Tamamla</button>
+    </form>
+	<!---Mesaj kutusu sadece ödeme başarılı olduktan sonra (redirectAttributes.addFlashAttribute(...)) görünür.-->
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Panel</title>
+    <style>
+        body {
+            background-color: lightblue;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            height: 100vh; /* Tüm ekran yüksekliği */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .panel {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            color: #007bff;
+        }
+
+        p {
+            color: #444;
+            margin-bottom: 30px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 12px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container"> <!--GENEL CONTAİNER ELEDİM BÜTÜN CSS ALSIN DİYE -->
+        <div class="panel">
+            <h1>BiSağlık Admin Paneline Hoş Geldin</h1>
+            <p>Yönetici yetkileri ile bu sayfadasınız.</p>
+        <a href="/pharmacy/list"><!---ylink yönlendirme -->
+    <button type="button">📋 Eczaneleri Görüntüle</button>
+            </a>
+        </div>
+    </div>
+</body>
+</html>

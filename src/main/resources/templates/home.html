@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>BiSağlık Application ANA SAYFA</title>
+	</head>
+	<body style=background-color:pink>
+		<h1>Giriş Başarılı!</h1>
+		<p>BiSağlık Eczaneye Hoş geldiniz</p>
+		
+		<p th:if="${authorization.expression('hasRole(''ADMIN'')')}">
+			Admin(Yönetici) paneline hoş geldin!
+		</p>
+		<p th:if="${#authorization.expression('hasRole(''USER'')')}">
+			User(Kullanıcı) paneline hoş geldin!
+		</p>
+		<!--hasRole('ADMIN') yazıyorsun ama Java'da "ROLE_ADMIN" olmalı. Çünkü Spring Security hasRole("X") dediğinde arka planda "ROLE_" + X diye bakar.
+			Eğer data.sql dosyanda şöyle bir kayıt varsa:
+			INSERT IGNORE INTO user(username, password, role) VALUES ('admin', 'admin', 'ADMIN');
+			Ve UserDetailsServiceImpl içinde "ROLE_" + user.getRole() ile tanımladıysan, bu hasRole('ADMIN') koşulu doğru şekilde çalışır.--->
+	</body>
+	</html>

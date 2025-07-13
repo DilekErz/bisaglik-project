@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		    <title>Sipariş Sepeti</title>
+	</head>
+	<body style="font-family: Arial; padding: 20px;">
+		
+		<h2>🛒 Sipariş Sepeti </h2>
+		
+		<table border="1" cellpadding="8" cellspacing="0">
+		        <thead>
+		            <tr>
+		                <th>ID</th>
+		                <th>İlaç Adı</th>
+		                <th>Barkod</th>
+		                <th>Stok</th>
+		                <th>Adet</th>
+						<th><strong>Eczane</strong></th>
+		                <th>İşlem</th>
+		            </tr>
+		        </thead>
+		        <tbody>
+		            <tr th:each="item : ${cartItems}">
+		                <td th:text="${item.id}"></td>
+		                <td th:text="${item.drug.name}"></td>
+		                <td th:text="${item.drug.barcodeNumber}"></td>
+		                <td th:text="${item.drug.stock}"></td>
+		                <td th:text="${item.quantity}"></td>
+						<td th:text="${item.drug.pharmacy.name}">Eczane Adı</td>
+		                <td>
+		                    <a th:href="@{'/cart/delete/' + ${item.id}}">
+		                        <button style="color: red;">❌ Kaldır</button>
+		                    </a>
+		                </td>
+		            </tr>
+		        </tbody>
+		    </table>
+
+		    <br>
+			<a th:href="@{'/drugs/pharmacy/' + ${cartItems[0].drug.pharmacy.id}}">
+			    <button>🗂️ İlaçlara Dön</button>
+			</a>
+
+
+			<br>
+			<form th:action="@{/cart/payment}" method="get" style="margin-top: 10px;">
+			    <button type="submit" style="background-color: green; color: white; padding: 6px 12px; border: none;">
+			        💳 Ödeme Yap
+			    </button>
+			</form>
+	</body>
+</html>

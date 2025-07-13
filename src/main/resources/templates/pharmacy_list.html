@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	<head>
+		<meta charset="UTF-8">
+		<title>Eczane Listesi</title>
+	</head>
+	<body style="font-family: Arial; padding: 20px; background-color:rgb(230, 230, 230)">
+		<h1>Eczane Listesi</h1>
+		
+		<form th:action="@{/pharmacy/search}" method="get" style="margin-bottom: 20px;">
+			<input type="text" name="keyword" placeholder="Eczane adı veya adresi ara..."/>
+			<button type="submit">Ara</button>
+		</form>
+		
+		<div style="text-align: right; margin-bottom: 10px;">
+		    <a th:href="@{/cart}">
+		        <button style="background-color: orange; padding: 6px 12px;">
+		            🛒 Sepetim <!--(<span th:text="${cartSize}">0</span>)-->
+		        </button>
+		    </a>
+		</div>
+
+		
+		<!---SADECE ADMİN GÖRSÜN-->
+		<div sec:authorize="hasRole('ADMIN')">
+		<a th:href="@{/pharmacy/add}">
+			<button>➕ Yeni Eczane Ekle</button>
+		</a>
+		</div>
+		<br><br>
+		<table border="1" cellpadding="8" cellspacing="0">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Adı</th>
+					<th>Adres</th>
+					<th>Telefon</th>		
+					<th>Nöbetçi mi?</th>
+					<th>Konumu</th>
+					<th>İlaçlar</th>
+					
+					<!---SADECE İŞLEMLERİ ADMİN GÖRSÜN-->
+					<th sec:authorize="hasRole('ADMIN')">İşlemler</th>
+					
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="pharmacy : ${pharmacies}">
+					<td th:text="${pharmacy.id}"></td>
+					               <td th:text="${pharmacy.name}"></td>
+					               <td th:text="${pharmacy.address}"></td>
+					               <td th:text="${pharmacy.phone}"></td>	           
+					               <td th:text="${pharmacy.onDuty} ? 'Evet' : 'Hayır'">
+									
+								   </td>
+								   
+					<td>
+						<!-- 🗺️ Google Maps Butonu -->
+										<a th:href="'https://www.google.com/maps/search/?api=1&query='+ ${pharmacy.address}" target="_blank">
+											<button style="background-color:rgb(197, 245, 197)">📍 Haritada Gör</button>
+											
+										</a>
+					</td>	
+					
+					<td>
+						<a th:href="@{'/drugs/pharmacy/'+ ${pharmacy.id} }">
+											<button style="background-color:lightcyan">💊 İlaçları Görüntüle</button>
+										</a>
+					</td>		   
+			<td sec:authorize="hasRole('ADMIN')">	
+				<a th:href="@{/pharmacy/update/{id}(id=${pharmacy.id})}">
+				<button>Güncelle</button>
+				</a>
+				
+				<a th:href="@{/pharmacy/delete/{id}(id=${pharmacy.id})}"
+				onclick="return confirm('silmek istediğne emin misin?')">
+				<button style="color: red;">🗑️ Sil</button>
+				</a>
+			
+				</td>
+		   </tr>
+	     </tbody>
+	 </table>
+	</body>
+</html>

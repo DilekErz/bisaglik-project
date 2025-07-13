@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Ödeme Başarılı</title>
+    <style>
+		body {
+		       background-color: #ffe6f0; /* Açık pembe */
+		       font-family: Arial, sans-serif; /*YAZI TİPİ*/
+		       text-align: center;
+		       padding: 80px 20px;
+		   }
+
+        .success-container {
+            background-color: #fff;
+            display: inline-block;
+            padding: 40px;
+            border-radius: 12px; /*ÇERÇEVE YARIÇAPI*/
+            box-shadow: 0 0 12px rgba(0,0,0,0.2);
+        }
+
+        .checkmark {
+            font-size: 48px;
+            color: white;
+        }
+
+        .title {
+            font-size: 32px;
+            color: rgb(128, 128, 128);
+            margin-top: 20px;
+        }
+
+        .message {
+            font-size: 18px;
+            color: #333;
+            margin: 10px 0 30px;
+        }
+
+        .button {
+            background-color: rgb(255, 128, 192);
+            color: white;
+            padding: 12px 24px;
+            font-size: 16px;
+            text-decoration: none;
+            border-radius: 6px;
+        }
+
+        .button:hover {
+            background-color: rgb(255, 79, 167);/*butonun üstüne geldiğinde rengi değiştir*/
+        }
+    </style>
+</head>
+<body>
+    <div class="success-container">
+        <div class="checkmark">✔</div>
+        <div class="title">ÖDEME BAŞARILI</div>
+        <div class="message">Satın alma işleminiz başarıyla gerçekleşti. Teşekkür ederiz.</div>
+        <a th:href="@{/drugs}" class="button">Ana Sayfaya Dön</a>
+    </div>
+</body>
+</html>

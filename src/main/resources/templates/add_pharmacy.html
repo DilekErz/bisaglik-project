@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		    <title>Yeni Eczane Ekle</title>
+	</head>
+	<body style="font-family: Arial; padding: 20px;">
+		<h1>➕ Yeni Eczane Ekle</h1>
+		<form th:action="@{/pharmacy/add}" th:object="${pharmacy}" method="post">
+			<label>Adı:</label><br>
+			<input type="text" th:field="*{name}" required><br><br>
+			
+			<label>Adres:</label><br>
+			<input type="text" th:field="*{address}" required ><br> <br>
+			
+			<label>Telefon:</label><br>
+			<input type="text" th:field="*{phone}" required><br><br>
+			
+
+			<label>Nöbetçi mi?</label><br>
+			<input type="checkbox" th:field="*{onDuty}"><br><br>
+		   
+			<button type="submit">💾 Kaydet</button>
+			<a th:href="@{/pharmacy/list}"><button type="button">🔙 Geri Dön</button></a>
+		</form>
+	</body>
+</html>
